@@ -7,6 +7,8 @@ import { RouterModule, Routes} from '@angular/router';
 import { AppComponent } from './app.component';
 import { ListEmployeesComponent } from './employees/list-employees.component';
 import { CreateEmployeeComponent } from './employees/create-employee.component';
+import { SelectReqValidatorDirective } from './shared/select-req-validator.directive';
+import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 
 const appRoutes: Routes = [{
   path: 'list',
@@ -26,7 +28,9 @@ const appRoutes: Routes = [{
   declarations: [
     AppComponent,
     ListEmployeesComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
+    SelectReqValidatorDirective,
+    ConfirmEqualValidatorDirective
   ],
   imports: [
     BrowserModule,

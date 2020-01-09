@@ -15,8 +15,9 @@
                                     class="form-control" type="text"
                                     [ngClass]="{'is-invalid': fullNameControl.invalid && fullNameControl.touched}"
                                     #fullNameControl="ngModel" required>
-                                    <span class="invalid-feedback" *ngIf="fullNameControl.invalid && fullNameControl.touched">Full Name is
-                                        required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="fullNameControl.invalid && fullNameControl.touched">Full Name is
+                                    required.</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="text-muted">Gender</label>
@@ -55,11 +56,16 @@
                             </div>
                             <div class="form-group col-md-6" *ngIf="isEmail">
                                 <label for="inputEmail4" class="text-muted">Email</label>
-                                <input type="email" name="email" [(ngModel)]="email" class="form-control"
-                                    id="inputEmail4" placeholder="Email" [ngClass]="{'is-invalid': emailControl.invalid && emailControl.touched}"
+                                <input type="email" name="email" [email]="employeeForm.email!==''" [(ngModel)]="email"
+                                    class="form-control" id="inputEmail4" placeholder="Email"
+                                    [ngClass]="{'is-invalid': emailControl.invalid && emailControl.touched}"
                                     #emailControl="ngModel" required>
-                                    <span class="invalid-feedback" *ngIf="fullNameControl.invalid && fullNameControl.touched">
-                                        Email is required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="emailControl.errors?.required && emailControl.touched">
+                                    Email is required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="emailControl.errors?.email && emailControl.touched">
+                                    Email is invalid.</span>
                             </div>
                         </div>
                         <div class="form-row">
@@ -68,10 +74,12 @@
                                 <div class="form-control">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck"
-                                            name="status" [(ngModel)]="status" [ngClass]="{'is-invalid': statusControl.invalid && statusControl.touched}"
+                                            name="status" [(ngModel)]="status"
+                                            [ngClass]="{'is-invalid': statusControl.invalid && statusControl.touched}"
                                             #statusControl="ngModel" required>
                                         <label class="custom-control-label" for="customCheck">isActive</label>
-                                        <span class="invalid-feedback" *ngIf="statusControl.invalid && statusControl.touched">
+                                        <span class="invalid-feedback"
+                                            *ngIf="statusControl.invalid && statusControl.touched">
                                             Status is required.</span>
                                     </div>
                                 </div>
@@ -79,50 +87,89 @@
                             <div class="form-group col-md-6" *ngIf="isMobile">
                                 <label for="inputMobile" class="text-muted">Mobile Number</label>
                                 <input type="number" name="mobile" [(ngModel)]="mobile" class="form-control"
-                                    id="inputMobile" placeholder="Mobile Number" [ngClass]="{'is-invalid': mobileControl.invalid && mobileControl.touched}"
+                                    id="inputMobile" placeholder="Mobile Number" pattern="[7-9]{1}[0-9]{9}"
+                                    [ngClass]="{'is-invalid': mobileControl.invalid && mobileControl.touched}"
                                     #mobileControl="ngModel" required>
-                                    <span class="invalid-feedback" *ngIf="mobileControl.invalid && mobileControl.touched">
-                                        Mobile number is required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="mobileControl.errors?.required && mobileControl.touched">
+                                    Mobile number is required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="mobileControl.errors?.pattern && mobileControl.touched">
+                                    Mobile number is invalid.</span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="text-muted">Department</label>
-                                <select id="dept" name="dept" class="custom-select" [(ngModel)]="dept"
-                                    value="Select Department" [ngClass]="{'is-invalid': deptControl.invalid && deptControl.touched}"
+                                <select id="dept" appSelectReqValidator name="dept" class="custom-select"
+                                    [(ngModel)]="dept" value="null" value="Select Department"
+                                    [ngClass]="{'is-invalid': deptControl.invalid && deptControl.touched}"
                                     #deptControl="ngModel" required>
+                                    <option value="-1">Select a Department</option>
                                     <option *ngFor="let dept of departments" [value]="dept.name">{{dept.name}}</option>
                                 </select>
-                                <span class="invalid-feedback" *ngIf="deptControl.invalid && deptControl.touched">
-                                        Department is required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="deptControl.errors?.defaultSelected && deptControl.touched || deptControl.errors?.required">
+                                    Department is required.</span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="text-muted">Date of Birth</label>
-                                <input type="text" placeholder="Select Date" name="date" [(ngModel)]="dob" class="form-control" bsDatepicker
-                                    [bsConfig]="bsConfig" [ngClass]="{'is-invalid': dateControl.invalid && dateControl.touched}"
+                                <input type="text" placeholder="Select Date" name="date" [(ngModel)]="dob"
+                                    class="form-control" bsDatepicker [bsConfig]="bsConfig"
+                                    [ngClass]="{'is-invalid': dateControl.invalid && dateControl.touched}"
                                     #dateControl="ngModel" required>
-                                    <span class="invalid-feedback" *ngIf="dateControl.invalid && dateControl.touched">
-                                        DOB is required.</span>
+                                <span class="invalid-feedback" *ngIf="dateControl.invalid && dateControl.touched">
+                                    DOB is required.</span>
                             </div>
                         </div>
 
-                        <!-- <div class="form-row">
-                            <div class="form-group">
-                                <div class="form-group">
+                        <div class="form-row" ngModelGroup="passwordGroup" #passwordGroup="ngModelGroup"
+                            [ngClass]="{'is-invalid': confirmpwdControl.invalid && confirmpwdControl.touched && !confirmpwdControl.errors?.required}">
+                            <div class="form-group col-md-6">
+                                <label for="pwd" class="text-muted">Password</label>
+                                <input type="text" name="pwd" [(ngModel)]="pwd" class="form-control" id="pwd"
+                                    placeholder="Password" (input)="confirmpwdControl.control.updateValueAndValidity()"
+                                    [ngClass]="{'is-invalid': pwdControl.invalid && pwdControl.touched}"
+                                    #pwdControl="ngModel" required>
+                                <span class="invalid-feedback"
+                                    *ngIf="pwdControl.errors?.required && pwdControl.touched">
+                                    Password is required.</span>
+                                <!-- <span class="invalid-feedback" *ngIf="pwdControl.errors?.email && pwdControl.touched">
+                                    Email is invalid.</span> -->
+                                <!-- <div class="form-group">
                                     <div class="form-check">
                                       <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                                       <label class="form-check-label" for="invalidCheck2">
                                         <small>By clicking Submit, you agree to our Terms & Conditions, Visitor Agreement and Privacy Policy.</small>
                                       </label>
                                     </div>
-                                  </div>
-                              </div>
-                        </div> -->
+                                  </div> -->
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="confirmpwd" class="text-muted">Confirm Password</label>
+                                <input type="text" name="confirmpwd" appConfirmEqualValidator="pwd"
+                                    [(ngModel)]="confirmpwd" class="form-control" id="confirmpwd"
+                                    placeholder="Confirm Password"
+                                    [ngClass]="{'is-invalid': confirmpwdControl.invalid && confirmpwdControl.touched}"
+                                    #confirmpwdControl="ngModel" required>
+                                <span class="invalid-feedback"
+                                    *ngIf="confirmpwdControl.errors?.required && confirmpwdControl.touched">
+                                    Confirm Password is required.</span>
+                                <span class="invalid-feedback"
+                                    *ngIf="confirmpwdControl.errors?.notEqual && confirmpwdControl.touched && !confirmpwdControl.errors?.required">
+                                    Password and Confirm Password does not match.</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-muted clearfix">
-                        <div class="card-text float-left">Emp entered details : <b>{{employeeForm.value | json}}</b>
+                        <div class="card-text float-left">
+                            Emp entered details : <b>{{employeeForm.value | json}}</b>
                         </div>
-                        <button type="submit" class="btn btn-primary float-right" [disabled]="employeeForm.invalid">Save</button>
+                        <div class="card-text float-right">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="employeeForm.invalid">Save</button>
+                        </div>
+
                     </div>
                 </div>
             </form>
