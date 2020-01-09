@@ -10,9 +10,6 @@ import { EmployeeService } from './employee.service';
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
   constructor(private employeeService: EmployeeService) { }
-  clickEventBtn(){
-    console.log('button Clicked');
-  }
   ngOnInit() {
     this.employees = this.employeeService.getEmployees();
   }

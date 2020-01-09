@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { EmployeeService } from './employee.service';
+import { Router } from '@angular/router';
+import { Employee } from '../models/employee.model';
+
 @Component({
   selector: 'app-create-employee',
   templateUrl: './create-employee.component.html',
@@ -30,7 +34,7 @@ export class CreateEmployeeComponent implements OnInit {
 ];
 colorTheme = 'theme-dark-blue';
 bsConfig: Partial<BsDatepickerConfig>;
-  constructor() {
+  constructor(private employeeService: EmployeeService, private router: Router) {
     this.bsConfig = Object.assign({}, {
       containerClass: this.colorTheme,
       adaptivePosition: true,
@@ -43,6 +47,8 @@ bsConfig: Partial<BsDatepickerConfig>;
 
   empForm(emp: NgForm): void {
     console.log(emp.value);
+    this.employeeService.listemployees.push(emp.value);
+    this.router.navigate(['list']);
   }
 
   isMPref() {

@@ -5,7 +5,7 @@ import { Employee } from '../models/employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private listemployees: Employee[] = [{
+  public listemployees: Employee[] = [{
     id: 1,
     name: 'Mark',
     gender: 'Male',
@@ -14,7 +14,6 @@ export class EmployeeService {
     dateOfBirth: new Date('07/05/1988'),
     department: 'IT',
     isActive: true
-    // photoPath?: string;
   },
   {
     id: 2,
@@ -40,6 +39,10 @@ export class EmployeeService {
 
   public getEmployees(): Employee[] {
     return this.listemployees;
+  }
+
+  public saveEmp(employee: EmployeeService){
+    this.listemployees.push()
   }
   constructor() { }
 }
