@@ -106,7 +106,13 @@
                                     [ngClass]="{'is-invalid': deptControl.invalid && deptControl.touched}"
                                     #deptControl="ngModel" required>
                                     <option value="-1">Select a Department</option>
-                                    <option *ngFor="let dept of departments" [value]="dept.name">{{dept.name}}</option>
+                                    <option *ngFor="let dept of departments" [value]="dept.name" [ngSwitch]="dept.id">
+                                        <span *ngSwitchCase= "1">HR</span>
+                                        <span *ngSwitchCase= "2">IT</span>
+                                        <span *ngSwitchCase= "3">Payroll</span>
+                                        <span *ngSwitchCase= "4">Helpdesk</span>
+                                        <span *ngSwitchDefault>N/A</span>
+                                    </option>
                                 </select>
                                 <span class="invalid-feedback"
                                     *ngIf="deptControl.errors?.defaultSelected && deptControl.touched || deptControl.errors?.required">

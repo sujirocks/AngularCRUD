@@ -1,26 +1,16 @@
 <div class="container">
-	<div class="row">
+    <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <span class="badge badge-primary">Employee List</span>
+            <div class="card text-muted mb-2 pl-3 pt-2 pb-2 pr-3 border border-primary" *ngIf="datafromChild">
+                <span class="badge badge-primary" *ngIf="datafromChild">Display-employee @Output (c->p) data comes from here!</span>
+                <div class="card-text">Selected Card Employee Name : <b>{{datafromChild}}</b></div>
+               
+            </div>
             <div class="card mb-2" *ngFor="let employee of employees">
-                <div class="card-header">
-                    <h6>Employee Name: <b>{{employee.name}}</b></h6>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Employee Details:</h6>
-                  <div class="card-text">Gender : <b>{{employee.gender}}</b></div>
-                  <div class="card-text">Email : <b>{{employee.email}}</b></div>
-                  <div class="card-text">Preference : <b>{{employee.contactPreference}}</b></div>
-                  <div class="card-text">Phone : <b>{{employee.phoneNumber}}</b></div>
-                  <div class="card-text">D.O.B : <b>{{employee.dateOfBirth | date: 'dd/MM/yyyy'}}</b></div>
-                  <div class="card-text">Dept. : <b>{{employee.department}}</b></div>
-                  <div class="card-text">Status : <b>{{employee.isActive}}</b></div>
-                  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                </div>
-                <div class="card-footer text-muted">
-                    <div class="card-text">Emp ID : <b>{{employee.id}}</b></div>
-                </div>
-              </div>
+                <app-display-employee [employee]="employee" (notify)="handleNofify($event)"></app-display-employee>
+                
+            </div>
+        </div>
     </div>
-	</div>
 </div>
