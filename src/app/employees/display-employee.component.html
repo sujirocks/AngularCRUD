@@ -1,16 +1,21 @@
 <span class="badge badge-primary">Display-employee @Input (p->c) data comes from here!</span>
-<div class="card-header" (click)="handleClick()">
-    <h6>Employee Name: <b>{{employee.name}}</b></h6>
+<div class="card cursor-pointer" (click)="handleClick()">
+    <div class="card-header">
+        <span >Employee Name: <b>{{employee.name}}</b><br>
+            Employee ID: 
+            <span><b>{{employee.id}}</b></span>
+            <a class="btn btn-primary btn-sm btn-animation" (click)="onClick(employee.id)" role="button">Click here for more details</a>
+        </span>
+    </div>
+    <div class="card-body">
+        <h6 class="card-title">Employee Details:</h6>
+        <div class="card-text">Gender : <b>{{employee.gender}}</b></div>
+        <div class="card-text">Email : <b>{{employee.email}}</b></div>
+        <div class="card-text">Preference : <b>{{employee.contactPreference}}</b></div>
+        <div class="card-text">Phone : <b>{{employee.phoneNumber}}</b></div>
+        <div class="card-text">Date of Birth : <b>{{employee.dateOfBirth | date: 'dd/MM/yyyy'}}</b></div>
+        <div class="card-text">Dept. : <b>{{employee.department}}</b></div>
+        <div class="card-text">Status : <b>{{employee.isActive}}</b></div>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
 </div>
-<div class="card-body">
-    <h6 class="card-title">Employee Details:</h6>
-    <div class="card-text">Gender : <b>{{employee.gender}}</b></div>
-    <div class="card-text">Email : <b>{{employee.email}}</b></div>
-    <div class="card-text">Preference : <b>{{employee.contactPreference}}</b></div>
-    <div class="card-text">Phone : <b>{{employee.phoneNumber}}</b></div>
-    <div class="card-text">D.O.B : <b>{{employee.dateOfBirth | date: 'dd/MM/yyyy'}}</b></div>
-    <div class="card-text">Dept. : <b>{{employee.department}}</b></div>
-    <div class="card-text">Status : <b>{{employee.isActive}}</b></div>
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-</div>
-

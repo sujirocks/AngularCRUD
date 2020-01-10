@@ -10,6 +10,8 @@ import { CreateEmployeeComponent } from './employees/create-employee.component';
 import { SelectReqValidatorDirective } from './shared/select-req-validator.directive';
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive';
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
+import { CreateEmployeecandeactivateService } from './employees/create-employeecandeactivate.service';
+import { EmployeedetailsComponent } from './employees/employeedetails.component';
 
 const appRoutes: Routes = [{
   path: 'list',
@@ -17,7 +19,12 @@ const appRoutes: Routes = [{
 },
 {
   path: 'create',
-  component: CreateEmployeeComponent
+  component: CreateEmployeeComponent,
+  canDeactivate: [CreateEmployeecandeactivateService]
+},
+{
+  path: 'employees/:id',
+  component: EmployeedetailsComponent
 },
 {
   path: '',
@@ -32,7 +39,8 @@ const appRoutes: Routes = [{
     CreateEmployeeComponent,
     SelectReqValidatorDirective,
     ConfirmEqualValidatorDirective,
-    DisplayEmployeeComponent
+    DisplayEmployeeComponent,
+    EmployeedetailsComponent
   ],
   imports: [
     BrowserModule,

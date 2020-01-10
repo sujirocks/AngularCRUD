@@ -1,0 +1,47 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+
+@-webkit-keyframes Floatingy{
+    from {-webkit-transform:translate(0, 0px);}
+    65% {-webkit-transform:translate(50px, 0);}
+    to {-webkit-transform: translate(0, -0px);}
+}
+@-moz-keyframes Floatingy{
+    from {-moz-transform:translate(0, 0px);}
+    65% {-moz-transform:translate(50px, 0);}
+    to {-moz-transform: translate(0, -0px);}
+}
+@-webkit-keyframes Floatingx{
+    from {-webkit-transform:translate(50px, 0px);}
+    65% {-webkit-transform:translate(0, 0);}
+    to {-webkit-transform: translate(50px, -0px);}
+}
+@-moz-keyframes Floatingx{
+    from {-moz-transform:translate(50px, 0px);}
+    65% {-moz-transform:translate(0, 0);}
+    to {-moz-transform: translate(50px, -0px);}
+}
+
+.btn-animation{
+	-webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in-out;
+    -webkit-animation-name: Floatingy;
+    -moz-animation-name: Floatingy;
+	-webkit-animation-duration: 5s;
+   -moz-animation-duration: 5s;
+   border-radius:5px;
+   color: #fff !important;
+   box-shadow:0 14px 26px -12px rgba(0,0,0,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
+}
+
+
+.btn-animation:hover
+{
+    box-shadow:0 14px 26px -12px rgba(0,0,0,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
+    color:#fff !important;
+}
+
+
