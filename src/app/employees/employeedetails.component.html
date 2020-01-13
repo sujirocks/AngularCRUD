@@ -2,6 +2,31 @@
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <span class="badge badge-primary">Employee Details</span>
+            <div class="card cursor-pointer">
+                <div class="card-header">
+                    <span >Employee Name: <b>{{employee.name}}</b><br>
+                        Employee ID: 
+                        <span><b>{{employee.id}}</b></span>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Employee Details:</h6>
+                    <div class="card-text">Gender : <b>{{employee.gender}}</b></div>
+                    <div class="card-text">Email : <b>{{employee.email}}</b></div>
+                    <div class="card-text">Preference : <b>{{employee.contactPreference}}</b></div>
+                    <div class="card-text">Phone : <b>{{employee.phoneNumber}}</b></div>
+                    <div class="card-text">Date of Birth : <b>{{employee.dateOfBirth | date: 'dd/MM/yyyy'}}</b></div>
+                    <div class="card-text">Dept. : <b>{{employee.department}}</b></div>
+                    <div class="card-text">Status : <b>{{employee.isActive}}</b></div>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+                <div class="card-footer clearfix">
+                    <div class="float-right">
+                        <button type="button" class="btn btn-primary btn-sm mr-2" [routerLink]="['/list']" routerLinkActive="router-link-active" queryParamsHandling="preserve"  role="button"><< Back to list</button>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="viewNextEmployee()"  role="button">View next details >></button>
+                    </div>
+                  </div>
+            </div>
         </div>
     </div>
 </div>

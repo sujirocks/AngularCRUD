@@ -10,7 +10,7 @@ export class CreateEmployeecandeactivateService implements CanDeactivate<CreateE
   constructor() { }
   canDeactivate(component: CreateEmployeeComponent): boolean {
     if (component.createEmployeeForm.dirty) {
-        return confirm('Are you sure you want to discard your changes?');
+        return confirm('Are you sure you want to leave this page?');
     }
     return true;
   }

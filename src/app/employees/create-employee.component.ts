@@ -11,7 +11,7 @@ import { Employee } from '../models/employee.model';
   styleUrls: ['./create-employee.component.scss']
 })
 export class CreateEmployeeComponent implements OnInit {
-  @ViewChild('employeeForm') public createEmployeeForm: NgForm;
+  @ViewChild('employeeForm', {static: false}) public createEmployeeForm: NgForm;
   isMobile = false;
   isEmail = true;
   gender = 'male';
@@ -49,6 +49,7 @@ bsConfig: Partial<BsDatepickerConfig>;
   empForm(emp: NgForm): void {
     console.log(emp.value);
     this.employeeService.listemployees.push(emp.value);
+    this.createEmployeeForm.reset(); // For skip confirmation and navigate with details.
     this.router.navigate(['list']);
   }
 

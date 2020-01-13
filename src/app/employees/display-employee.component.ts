@@ -18,7 +18,12 @@ export class DisplayEmployeeComponent implements OnInit {
   constructor(private router: Router) { }
   ngOnInit() { }
   onClick(employeeId: number) {
-    this.router.navigate(['/employees', employeeId]);
+    this.router.navigate(['/employees', employeeId], {
+      queryParams: {
+        searchNameID : employeeId,
+        testParams: 'testvalue'
+      }
+    });
   }
    /* with template reference call child component methods and properties*/
   //  public getEmail(): string {

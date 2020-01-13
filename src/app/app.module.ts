@@ -12,6 +12,7 @@ import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
 import { CreateEmployeecandeactivateService } from './employees/create-employeecandeactivate.service';
 import { EmployeedetailsComponent } from './employees/employeedetails.component';
+import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
 
 const appRoutes: Routes = [{
   path: 'list',
@@ -40,7 +41,8 @@ const appRoutes: Routes = [{
     SelectReqValidatorDirective,
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
-    EmployeedetailsComponent
+    EmployeedetailsComponent,
+    EmployeeFilterPipe
   ],
   imports: [
     BrowserModule,
