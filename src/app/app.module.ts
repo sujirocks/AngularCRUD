@@ -13,6 +13,8 @@ import { DisplayEmployeeComponent } from './employees/display-employee.component
 import { CreateEmployeecandeactivateService } from './employees/create-employeecandeactivate.service';
 import { EmployeedetailsComponent } from './employees/employeedetails.component';
 import { EmployeeFilterPipe } from './employees/employee-filter.pipe';
+import { PageNotFoundComponent } from './page-not-found.component';
+import { EmployeeDetailsGuardService } from './employees/employee-details-guard.service';
 
 const appRoutes: Routes = [{
   path: 'list',
@@ -25,12 +27,17 @@ const appRoutes: Routes = [{
 },
 {
   path: 'employees/:id',
-  component: EmployeedetailsComponent
+  component: EmployeedetailsComponent,
+  canActivate: [EmployeeDetailsGuardService]
 },
 {
   path: '',
   redirectTo : '/list',
   pathMatch : 'full'
+},
+{
+  path: 'notfound',
+  component: PageNotFoundComponent
 }
 ];
 @NgModule({
@@ -42,7 +49,8 @@ const appRoutes: Routes = [{
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
     EmployeedetailsComponent,
-    EmployeeFilterPipe
+    EmployeeFilterPipe,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
